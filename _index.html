@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- cssの読み込み -->
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .svg-image {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        z-index: 1000;
+      }
+
+      .svg-star {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        z-index: 1000;
+        transform: scale(0.5);
+        transform: rotate(45deg);
+      }
+    </style>
+  </head>
+  <body id="body-container">
+    <div class="piano">
+      <ul class="set">
+        <li id="e1" class="white e"></li>
+        <li id="ds1" class="black ds"></li>
+        <li id="d1" class="white d"></li>
+        <li id="cs1" class="black cs"></li>
+        <li id="c1" class="white c"></li>
+        <li id="b1" class="white b"></li>
+        <li id="as1" class="black as"></li>
+        <li id="a1" class="white a"></li>
+        <li id="gs1" class="black gs"></li>
+        <li id="g1" class="white g"></li>
+        <li id="fs1" class="black fs"></li>
+        <li id="f1" class="white f"></li>
+        <li id="e2" class="white e"></li>
+        <li id="ds2" class="black ds"></li>
+        <li id="d2" class="white d"></li>
+        <li id="cs2" class="black cs"></li>
+        <li id="c2" class="white c"></li>
+        <li id="b2" class="white b"></li>
+        <li id="as2" class="black as"></li>
+        <li id="a2" class="white a"></li>
+        <li id="gs2" class="black gs"></li>
+        <li id="g2" class="white g"></li>
+        <li id="fs2" class="black fs"></li>
+        <li id="f2" class="white f"></li>
+        <li id="e3" class="white e"></li>
+        <li id="ds3" class="black ds"></li>
+        <li id="d3" class="white d"></li>
+        <li id="cs3" class="black cs"></li>
+        <li id="c3" class="white c"></li>
+        <li id="b3" class="white b"></li>
+        <li id="as3" class="black as"></li>
+        <li id="a3" class="white a"></li>
+        <li id="gs3" class="black gs"></li>
+        <li id="g3" class="white g"></li>
+        <li id="fs3" class="black fs"></li>
+        <li id="f3" class="white f"></li>
+      </ul>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const mainContainer = document.getElementById("body-container");
+
+        mainContainer.addEventListener("click", (event) => {
+          // クリックされた要素がli要素であるかどうかを確認
+          if (event.target.tagName.toLowerCase() === "li") {
+            const clickedId = event.target.id; // クリックされたliのidを取得
+            console.log("Clicked key ID:", clickedId);
+
+            const svgSrc = "SVG/red.svg"; // 表示したいSVGのパスを指定
+            const img = document.createElement("img");
+            img.src = svgSrc;
+            img.classList.add("svg-image");
+            img.style.left = `${event.clientX - 50}px`;
+            img.style.top = `${event.clientY - 50}px`;
+            mainContainer.appendChild(img);
+
+            // 0.5秒後にSVGを削除
+            setTimeout(() => {
+              mainContainer.removeChild(img);
+            }, 500);
+          }
+        });
+      });
+
+      // 常にカーソルを追跡してsvgを表示
+      document.addEventListener("mousemove", (event) => {
+        const mainContainer = document.getElementById("body-container");
+        const svgSrc = "SVG/star.svg"; // 表示したいSVGのパスを指定
+        const img = document.createElement("img");
+        img.src = svgSrc;
+        img.classList.add("svg-star");
+        img.style.left = `${event.clientX - 50}px`;
+        img.style.top = `${event.clientY - 50}px`;
+        mainContainer.appendChild(img);
+
+        // 0.5秒後にSVGを削除
+        setTimeout(() => {
+          mainContainer.removeChild(img);
+        }, 500);
+      });
+    </script>
+  </body>
+</html>
